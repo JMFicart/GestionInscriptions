@@ -46,15 +46,15 @@ public class MenuFactory {
     }
 
     public Item addItemActivityList() {
-        return createItem("Hello World", new ActivityTypeCreation());
+        return createItem("Ajouter type d'activité", new ActivityListFactory());
     }
 
     public Item getItemActivityList() {
-        return createItem("Hello World", new ActivityTypeCreation());
+        return createItem("Chercher type d'activité", new ActivityListFactory());
     }
 
     public Item removeItemActivityList() {
-        return createItem("Hello World", new ActivityTypeCreation());
+        return createItem("Supprimer type d'activité", new ActivityListFactory());
     }
 
     private Item getItemQuitter() {

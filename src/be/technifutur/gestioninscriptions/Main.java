@@ -8,6 +8,12 @@ public class Main {
         boolean flag = true;
         Callable action;
 
+        ActivityListFactory alf = new ActivityListFactory();
+        ListActivityType lat = new ListActivityType();
+        ListActivityVue lav = new ListActivityVue();
+        alf.getVue(lav);
+        alf.GetModele(lat);
+
         while (flag) {
             action = mf.getMenu().getAction();
             if (action != null) {

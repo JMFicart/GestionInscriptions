@@ -16,6 +16,7 @@ public class ListActivityType {
         }
         else
         {
+            System.out.println(name + " enregistré !");
             activitytype = new ActivityType(name, registrationRequired);
             activitytypelist.put(name, activitytype);
         }
@@ -45,5 +46,14 @@ public class ListActivityType {
             activitytype = null;
         }
         return activitytype;
+    }
+
+    public void lister() {
+        for (Map.Entry<String, List<ActivityType>> e : activitytypelist.entrySet()) {
+            System.out.println(e.getKey());
+            for (ActivityType p : e.getValue()) {
+                System.out.println("     " + p);
+            }
+        }
     }
 }
