@@ -7,7 +7,7 @@ public class ActivityType {
     public static void main(String[] args) {
     }
 
-    ActivityType(String name, boolean inscription){
+    public ActivityType(String name, boolean inscription){
         this.name = name;
         this.registration = inscription;
     }

@@ -38,34 +38,25 @@ public class MenuFactory {
 
     private MenuModel getModelActivity(){
         MenuModel model = new MenuModel("Menu Activity");
+        model.addNode(addItemActivityList());
         model.addNode(getItemActivityList());
-//        model.addNode(getItemExY2());
-//        model.addNode(getItemExY3());
-//        model.addNode(getItemExY4());
-//        model.addNode(getItemQuitter());
+        model.addNode(removeItemActivityList());
+        model.addNode(getItemQuitter());
         return model;
+    }
+
+    public Item addItemActivityList() {
+        return createItem("Hello World", new ActivityTypeCreation());
     }
 
     public Item getItemActivityList() {
         return createItem("Hello World", new ActivityTypeCreation());
     }
 
-//    public Item getItemExY1() {
-//        return createItem("5 numbers in an array", new ExY1());
-//    }
-//
-//    public Item getItemExY2() {
-//        return createItem("Test de la présence d'une chaîne", new ExY2());
-//    }
-//
-//    public Item getItemExY3() {
-//        return createItem("Deviner un nombre", new ExY3());
-//    }
-//
-//    public Item getItemExY4() {
-//        return createItem("Diagonales d'un carré", new ExY4());
-//    }
-//
+    public Item removeItemActivityList() {
+        return createItem("Hello World", new ActivityTypeCreation());
+    }
+
     private Item getItemQuitter() {
         return createItem("Quitter", null );
     }
