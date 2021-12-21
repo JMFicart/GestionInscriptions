@@ -3,22 +3,31 @@ package be.technifutur.gestioninscriptions;
 import java.util.*;
 
 public class ListActivityType {
-    Map<String, ActivityType> activitytypelist = new HashMap<>();
+    Map<String, ActivityType> activitytypelist; // = new HashMap<>();
     ActivityType activitytype;
 
-    //    public static void main(String[] args) {
-//    }
+    ListActivityType(){
+        if(activitytypelist == null){
+            activitytypelist = new HashMap<>();
+            System.out.println("ListActivityType.constructor Création");
+        }
+        else
+        {
+            System.out.println("ListActivityType.constructor Pas de création");
+        }
+    }
 
     public ActivityType addActivityType(String name, boolean registrationRequired){
         if (activitytypelist.containsKey(name.toUpperCase())== true) {
             System.out.println(name + " existe déjà !");
-            activitytype = null;
+//            activitytype = null;
         }
         else
         {
-            System.out.println(name + " enregistré !");
             activitytype = new ActivityType(name, registrationRequired);
             activitytypelist.put(name, activitytype);
+            System.out.println(name + " enregistré !");
+            lister();
         }
 
         return activitytype;
@@ -49,11 +58,11 @@ public class ListActivityType {
     }
 
     public void lister() {
-        for (Map.Entry<String, List<ActivityType>> e : activitytypelist.entrySet()) {
+        ActivityType p;
+        for (Map.Entry<String, ActivityType> e:activitytypelist.entrySet()) {
             System.out.println(e.getKey());
-            for (ActivityType p : e.getValue()) {
-                System.out.println("     " + p);
-            }
+            p = e.getValue();
+            System.out.println("     " + p.name + " " + p.registration);
         }
     }
 }

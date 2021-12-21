@@ -7,12 +7,12 @@ public class Main {
         MenuFactory mf = new MenuFactory();
         boolean flag = true;
         Callable action;
-
-        ActivityListFactory alf = new ActivityListFactory();
-        ListActivityType lat = new ListActivityType();
-        ListActivityVue lav = new ListActivityVue();
-        alf.getVue(lav);
-        alf.GetModele(lat);
+//        ActivityListControler alc = new ActivityListControler();
+//        ListActivityType lat = new ListActivityType();
+//        ListActivityVue lav = new ListActivityVue();
+//
+//        alc.setVue(lav);
+//        alc.setModele(lat);
 
         while (flag) {
             action = mf.getMenu().getAction();

@@ -4,9 +4,6 @@ import java.util.Scanner;
 
 public class ListActivityVue {
     static Scanner es = new Scanner(System.in);
-    public static void main(String[] args) {
-
-    }
 
     public static String getname(){
         System.out.print("Saisir le nom de l'activité = ");

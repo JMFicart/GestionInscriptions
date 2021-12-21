@@ -10,6 +10,8 @@ public class ActivityType {
     public ActivityType(String name, boolean inscription){
         this.name = name;
         this.registration = inscription;
+
+        System.out.println("ActivityType = " + name + ", " + inscription);
     }
 
     public boolean isRegistrationRequired(){

@@ -7,6 +7,20 @@ import be.technifutur.gestioninscriptions.ActivityTypeCreation;
 //import be.technifutur.menu.actions.ExY4;
 
 public class MenuFactory {
+    ActivityListControler alc;
+    ListActivityType lat;
+    ListActivityVue lav;
+
+    MenuFactory(){
+        if (alc == null){
+            alc = new ActivityListControler();
+            lat = new ListActivityType();
+            lav = new ListActivityVue();
+            alc.setVue(lav);
+            alc.setModele(lat);
+        }
+    }
+
     private Item createItem(String itemname, Callable itemaction) {
         Item wItem;
 
@@ -37,28 +51,27 @@ public class MenuFactory {
     }
 
     private MenuModel getModelActivity(){
-        MenuModel model = new MenuModel("Menu Activity");
-        model.addNode(addItemActivityList());
-        model.addNode(getItemActivityList());
-        model.addNode(removeItemActivityList());
-        model.addNode(getItemQuitter());
-        return model;
+        MenuModel model1 = new MenuModel("Menu Activity");
+        model1.addNode(addItemActivityList());
+        model1.addNode(getItemActivityList());
+        model1.addNode(removeItemActivityList());
+        model1.addNode(getItemQuitter());
+        return model1;
     }
 
     public Item addItemActivityList() {
-        return createItem("Ajouter type d'activité", new ActivityListFactory());
+        return createItem("Ajouter type d'activité", alc);
     }
 
     public Item getItemActivityList() {
-        return createItem("Chercher type d'activité", new ActivityListFactory());
+        return createItem("Chercher type d'activité", alc);
     }
 
     public Item removeItemActivityList() {
-        return createItem("Supprimer type d'activité", new ActivityListFactory());
+        return createItem("Supprimer type d'activité", alc);
     }
 
     private Item getItemQuitter() {
         return createItem("Quitter", null );
     }
 }
-
