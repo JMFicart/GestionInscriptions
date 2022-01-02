@@ -10,14 +10,18 @@ public class MenuFactory {
     ActivityListControler alc;
     ListActivityType lat;
     ListActivityVue lav;
+    IOData io;
 
     MenuFactory(){
         if (alc == null){
             alc = new ActivityListControler();
             lat = new ListActivityType();
             lav = new ListActivityVue();
+            io = new IOData();
+
             alc.setVue(lav);
             alc.setModele(lat);
+            alc.setIO(io);
         }
     }
 

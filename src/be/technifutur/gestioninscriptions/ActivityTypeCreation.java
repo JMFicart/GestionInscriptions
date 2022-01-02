@@ -9,8 +9,6 @@ public class ActivityTypeCreation implements Callable {
         @Override
         public Object call() {
 //            lat =
-            //System.out.println("ActivityTypeCreation.call()");
-
             return null;
         }
 }

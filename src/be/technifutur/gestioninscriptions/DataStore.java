@@ -18,10 +18,14 @@ public class DataStore<D extends Serializable> {
         public D getData() {
             if (data == null) {
                 try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))) {
+                    // Trace 002
+                    System.out.println("Lecture fichier");
                     data = (D) input.readObject();
                 } catch (FileNotFoundException e) {
+                    System.out.println("File not found");
                     data = supplier.get();
                 } catch (IOException | ClassNotFoundException e) {
+                    System.out.println("Autre cas");
                     e.printStackTrace();
                 }
             }
@@ -32,8 +36,11 @@ public class DataStore<D extends Serializable> {
             if (data != null) {
                 try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
                     output.writeObject(data);
+                    // Trace 004
+                    System.out.println("Ecriture fichier");
                 } catch (IOException e) {
                     e.printStackTrace();
+                    System.out.println("AutrePossibilité");
                 }
             }
         }

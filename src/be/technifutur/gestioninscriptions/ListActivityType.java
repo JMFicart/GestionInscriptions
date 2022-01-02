@@ -5,15 +5,27 @@ import java.util.*;
 public class ListActivityType {
     Map<String, ActivityType> activitytypelist; // = new HashMap<>();
     ActivityType activitytype;
+    IOData io;
+    MyData dt;
 
     ListActivityType(){
         if(activitytypelist == null){
             activitytypelist = new HashMap<>();
-            System.out.println("ListActivityType.constructor Création");
-        }
-        else
-        {
-            System.out.println("ListActivityType.constructor Pas de création");
+            io = new IOData();
+            dt = io.LoadData();
+
+//            for (ActivityType s : dt.list){
+//                System.out.println("Chargement données = " + s.name + "," + s.registration);
+//                activitytypelist.put(s.name, s);
+//            }
+            // Trace 001
+
+            System.out.println("Fin de chargement données");
+            System.out.println("Listage des données");
+            System.out.println(activitytypelist.size());
+            for (Map.Entry<String, ActivityType> e:activitytypelist.entrySet()) {
+                System.out.println(e.getValue().name + " " + e.getValue().registration);
+            }
         }
     }
 
@@ -26,10 +38,9 @@ public class ListActivityType {
         {
             activitytype = new ActivityType(name, registrationRequired);
             activitytypelist.put(name, activitytype);
-            System.out.println(name + " enregistré !");
             lister();
+            io.SaveData(activitytypelist);
         }
-
         return activitytype;
     }
 
