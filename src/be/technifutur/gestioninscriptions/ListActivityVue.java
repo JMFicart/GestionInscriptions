@@ -16,7 +16,7 @@ public class ListActivityVue {
 
         System.out.print("Saisir la nécessité d'une registration = ");
         reponse = es.nextLine().toUpperCase();
-        if (reponse.equals("Y")) {
+        if (reponse.toUpperCase().equals("Y")) {
             rv = true;
         }
         else

@@ -10,14 +10,32 @@ public class MenuFactory {
     ActivityListControler alc;
     ListActivityType lat;
     ListActivityVue lav;
+    GetActivityType gat;
+    RemoveActivityType rat;
+    ListerFichierActivityType lfat;
+    IOData io;
 
     MenuFactory(){
         if (alc == null){
             alc = new ActivityListControler();
             lat = new ListActivityType();
+            gat = new GetActivityType();
+            rat = new RemoveActivityType();
             lav = new ListActivityVue();
+            io = new IOData();
+            lfat = new ListerFichierActivityType();
+
             alc.setVue(lav);
             alc.setModele(lat);
+            alc.setIO(io);
+            alc.setGat(gat);
+            alc.setRat(rat);
+            gat.setModele(lat);
+            gat.setVue(lav);
+            rat.setModele(lat);
+            rat.setVue(lav);
+            lfat.setModele(lat);
+            lfat.setVue(lav);
         }
     }
 
@@ -55,6 +73,7 @@ public class MenuFactory {
         model1.addNode(addItemActivityList());
         model1.addNode(getItemActivityList());
         model1.addNode(removeItemActivityList());
+        model1.addNode(listerItemActivityList());
         model1.addNode(getItemQuitter());
         return model1;
     }
@@ -64,11 +83,15 @@ public class MenuFactory {
     }
 
     public Item getItemActivityList() {
-        return createItem("Chercher type d'activité", alc);
+        return createItem("Chercher type d'activité", gat);
     }
 
     public Item removeItemActivityList() {
-        return createItem("Supprimer type d'activité", alc);
+        return createItem("Supprimer type d'activité", rat);
+    }
+
+    public Item listerItemActivityList() {
+        return createItem("Lister le contenu du fichier type d'activité", lfat);
     }
 
     private Item getItemQuitter() {

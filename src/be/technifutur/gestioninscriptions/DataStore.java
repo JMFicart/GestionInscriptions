@@ -5,7 +5,6 @@ import java.util.ServiceLoader;
 import java.util.function.Supplier;
 
 public class DataStore<D extends Serializable> {
-
         private final Supplier<D> supplier;
         private String file;
         private D data;
@@ -15,7 +14,7 @@ public class DataStore<D extends Serializable> {
             this.supplier = supplier;
         }
 
-        public D getData() {
+        public D readData() {
             if (data == null) {
                 try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))) {
                     data = (D) input.readObject();
@@ -28,7 +27,8 @@ public class DataStore<D extends Serializable> {
             return data;
         }
 
-        public void save() {
+        public void writeData(MyData data) {
+//            System.out.println("WriteData = " + data.listactivity.size());
             if (data != null) {
                 try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
                     output.writeObject(data);

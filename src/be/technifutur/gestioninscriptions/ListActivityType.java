@@ -1,68 +1,101 @@
 package be.technifutur.gestioninscriptions;
 
+import javax.swing.*;
 import java.util.*;
 
 public class ListActivityType {
-    Map<String, ActivityType> activitytypelist; // = new HashMap<>();
-    ActivityType activitytype;
+    public ArrayList<ActivityType> activitytypelist; // = new HashMap<>();
+    public ActivityType activitytype;
+    private IOData io;
+    private Boolean found = false;
+    MyData dt;
 
     ListActivityType(){
-        if(activitytypelist == null){
-            activitytypelist = new HashMap<>();
-            System.out.println("ListActivityType.constructor Création");
-        }
-        else
-        {
-            System.out.println("ListActivityType.constructor Pas de création");
-        }
+        io = new IOData();
+        dt = io.LoadData();
     }
 
     public ActivityType addActivityType(String name, boolean registrationRequired){
-        if (activitytypelist.containsKey(name.toUpperCase())== true) {
-            System.out.println(name + " existe déjà !");
-//            activitytype = null;
+        found = false;
+
+//        System.out.println("Taille du fichier = " + dt.listactivity.size());
+        for (ActivityType activitytype : dt.listactivity) {
+            if (activitytype.name.equals(name)) {
+                System.out.println(name + " existe déjà !");
+                found = true;
+                break;
+            }
         }
-        else
-        {
+        if (!found) {
             activitytype = new ActivityType(name, registrationRequired);
-            activitytypelist.put(name, activitytype);
+            dt.listactivity.add(activitytype);
+//            System.out.println("Taille du fichier mémoire = " + dt.listactivity.size());
+//            lister();
             System.out.println(name + " enregistré !");
-            lister();
-        }
-
-        return activitytype;
-    }
-
-    public ActivityType get(String name){
-        if (activitytypelist.containsKey(name.toUpperCase())== true) {
-            activitytype = activitytypelist.get(name);
+            io.SaveData();
+//            System.out.println("Données sauvegardées");
         }
         else
         {
-            System.out.println(name + " n'existe pas !");
             activitytype = null;
         }
         return activitytype;
     }
 
-    public ActivityType remove(String name){
-        if (activitytypelist.containsKey(name.toUpperCase())== true) {
-            activitytype = activitytypelist.remove(name);
+    public ActivityType getActivityType(String name){
+        Integer i;
+
+        found = false;
+
+        for (i = 0;i < dt.listactivity.size();i++) {
+            if (dt.listactivity.get(i).name.equals(name)){
+                this.activitytype = dt.listactivity.get(i);
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            System.out.println("Nom de l'activité = " + this.activitytype.name);
+            System.out.println("Registration nécessaire = " + this.activitytype.registration);
         }
         else
         {
-            System.out.println(name + " n'existe pas !");
-            activitytype = null;
+            System.out.println("Pas trouvé !");
         }
         return activitytype;
     }
 
-    public void lister() {
-        ActivityType p;
-        for (Map.Entry<String, ActivityType> e:activitytypelist.entrySet()) {
-            System.out.println(e.getKey());
-            p = e.getValue();
-            System.out.println("     " + p.name + " " + p.registration);
+    public ActivityType removeActivityType(String name){
+        String confirm = "N";
+        Scanner sc=new Scanner(System.in);
+        Integer i;
+
+        found = false;
+
+        for (i = 0;i < dt.listactivity.size();i++) {
+            if (dt.listactivity.get(i).name.equals(name)){
+                this.activitytype = dt.listactivity.get(i);
+                found = true;
+                break;
+            }
         }
+        if (found) {
+            System.out.println("Nom de l'activité = " + this.activitytype.name);
+            System.out.println("Registration nécessaire = " + this.activitytype.registration);
+            System.out.println("");
+            System.out.print("Confirmez la suppression (Y/N) ");
+            confirm = sc.nextLine();
+            if (confirm.toUpperCase().equals("Y")){
+                dt.listactivity.remove(i);
+                System.out.println(this.activitytype.name + " est effacée !");
+                io.SaveData();
+            }
+        }
+        else
+        {
+            System.out.println("Pas trouvé !");
+        }
+        return activitytype;
     }
+
 }
